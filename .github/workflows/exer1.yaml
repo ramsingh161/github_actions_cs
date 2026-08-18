@@ -1,9 +1,9 @@
 name: the system report
 
 on: 
-  push: workflow_dispatch
-jobs:
-  system-info:
+#   push: workflow_dispatch
+# jobs:
+#   system-info:
     runs-on: ubuntu-latest
 
     steps:
