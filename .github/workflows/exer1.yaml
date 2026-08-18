@@ -1,7 +1,7 @@
 name: the system report
 
 on: 
-  push:
+  push: workflow_dispatch
 jobs:
   system-info:
     runs-on: ubuntu-latest
