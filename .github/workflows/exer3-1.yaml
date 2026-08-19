@@ -10,27 +10,32 @@
 # Prints where the python binary is installed on the runner
 # Finishes by printing "Inspection complete"
 
+
 name: Python Inspector
 
 on:
-  push
+  push:
   workflow_dispatch:
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Set up Python 3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Print Python version
-        run: python --version
-      - name: Print pip version
-        run: pip --version
-      - name: Print Python binary location
-        run: which python
-      - name: Inspection complete
+
+      - name: Inspect Python environment
+        run: |
+          python --version
+          pip --version
+          which python
+
+      - name: Finish inspection
         run: echo "Inspection complete"
+

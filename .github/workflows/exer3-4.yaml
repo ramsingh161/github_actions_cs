@@ -14,21 +14,48 @@
 name: Ordered Pipeline
 
 on:
-  push
+  push:
   workflow_dispatch:
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Set up Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
-          node-version: '24.x'
+          node-version: '20'
+
+      - name: Deliberately fail setup
+        run: exit 1
+
       - name: Setup done
+        run: echo "Setup done"
+
+  verify:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify runtime
         run: |
-          echo "Setup done"
-          exit 1  # Deliberately fail the setup job
+          node --version
+          echo "Verify done"
+
+  finish:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Finish pipeline
+        run: echo "Pipeline finished"
         
