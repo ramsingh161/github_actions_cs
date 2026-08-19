@@ -24,11 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app
+        working-directory: react-app
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        # Checkout is not affected by defaults.run.working-directory because `uses` steps don't execute shell commands.
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
