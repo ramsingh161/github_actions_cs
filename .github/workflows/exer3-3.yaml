@@ -1,0 +1,42 @@
+# Scenario: The subfolder builder
+
+# Your repository has a folder called app holding a small project, and the workflow file lives at the repository root. Write a new workflow called Subfolder Builder that:
+
+# Triggers on push and manual dispatch
+# Has one job called build that runs on the latest Ubuntu runner
+# Sets a default working directory of app for all run steps
+# Checks out the repository
+# Sets up any runtime of your choice using a marketplace action
+# Prints the current working directory
+# Lists the files in that directory
+# Finishes by printing "Build folder confirmed"
+
+# Note in one line whether the checkout step was affected by the default working directory, and why.
+
+name: Subfolder Builder
+
+on:
+  push
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24.x'
+      - name: Print current working directory
+        run: pwd
+      - name: List files in current directory
+        run: ls -la
+      - name: Build folder confirmed
+        run: echo "Build folder confirmed"
+
+         

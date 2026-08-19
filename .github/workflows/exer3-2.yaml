@@ -1,0 +1,37 @@
+# Scenario: The checkout proof
+
+# Your team keeps forgetting that a runner starts empty. Write a new workflow called Checkout Proof that:
+
+# Triggers on push and manual dispatch
+# Has one job called prove that runs on the latest Ubuntu runner
+# Before checking out anything, prints the current folder path and lists its contents
+# Then checks out the repository
+# Lists the contents of the folder again
+# Counts how many files are now present
+# Finishes by printing "Proof captured"
+
+# Write one line explaining what the two listings show.
+
+name: Checkout Proof
+
+on:
+  push
+  workflow_dispatch:
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    steps:
+        - name: print current folder path
+          run: pwd
+        - name: list contents of current folder
+          run: ls -la
+        - name: Checkout repository
+          uses: actions/checkout@v7
+        - name: list contents of current folder after checkout
+          run: ls -la
+        - name: count number of files after checkout
+          run: ls -1 | wc -l
+        - name: Proof captured
+          run: echo "Proof captured"
+    
