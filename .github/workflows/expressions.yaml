@@ -1,19 +1,21 @@
 name: using expressions
-run-name: Using Expressions | DEBUG - $((inputs.debug && 'ON' || 'OFF'))
+
+run-name: Using Expressions | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }}
 
 on:
   workflow_dispatch:
     inputs:
-        debug:
-            type: boolean
-            default: false
+      debug:
+        type: boolean
+        default: false
 
 jobs:
   echo:
     runs-on: ubuntu-latest
+
     steps:
       - name: '[Debug] print start-up data'
-      if: inputs.debug
+        if: inputs.debug
         run: |
           echo "debug mode is ON"
           echo "workflow name: ${{ github.workflow }}"
@@ -24,12 +26,13 @@ jobs:
           echo "repository: ${{ github.repository }}"
           echo "Branch: ${{ github.ref }}"
           echo "SHA: ${{ github.sha }}"
+
       - name: '[Debug] Print when triggered from main'
-        if: inputs.debug && github.ref == 'main'
+        if: inputs.debug && github.ref == 'refs/heads/main'
         run: |
           echo "This workflow was triggered from the main branch"
+
       - name: greetings
-        run:  |
+        run: |
           echo "Hello, ${{ github.actor }}! Welcome to the using expressions workflow."
-          echo "Debug mode is $((inputs.debug && 'ON' || 'OFF'))"
-          
+          echo "Debug mode is ${{ inputs.debug && 'ON' || 'OFF' }}"
