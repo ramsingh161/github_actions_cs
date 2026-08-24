@@ -15,8 +15,8 @@
 name: Checkout Proof
 
 on:
-  push:
-  workflow_dispatch:
+  # push:
+  # workflow_dispatch:
 
 jobs:
   prove:

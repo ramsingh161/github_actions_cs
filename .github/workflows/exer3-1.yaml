@@ -13,11 +13,11 @@
 
 name: Python Inspector
 
-on:
-  push:
-  workflow_dispatch:
+# on:
+#   push:
+#   workflow_dispatch:
 
-jobs:
+# jobs:
   inspect:
     runs-on: ubuntu-latest
 

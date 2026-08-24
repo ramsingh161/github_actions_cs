@@ -16,11 +16,11 @@
 name: Subfolder Builder
 
 on:
-  push:
-  workflow_dispatch:
+#   push:
+#   workflow_dispatch:
 
-jobs:
-  build:
+# jobs:
+#   build:
     runs-on: ubuntu-latest
     defaults:
       run:
